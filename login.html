@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | CDAC LMS</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-lg-10">
+          <div class="card shadow-lg border-0 rounded-4">
+            <div class="row g-0">
+              <!-- Left Side - Branding -->
+              <div
+                class="col-md-5 bg-primary text-white rounded-start-4 p-5 d-flex flex-column justify-content-center"
+              >
+                <div class="text-center mb-4">
+                  <i class="bi bi-book-fill" style="font-size: 5rem"></i>
+                </div>
+                <h3 class="fw-bold text-center mb-3">CDAC LMS</h3>
+                <p class="text-center mb-4">
+                  Sign in to access courses, assignments and management tools
+                </p>
+                <div class="alert alert-light">
+                  <small
+                    ><strong>Tip:</strong> Use your ID and password provided by
+                    the admin.</small
+                  >
+                </div>
+              </div>
+
+              <!-- Right Side  -->
+              <div class="col-md-7 p-5">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-4"
+                >
+                  <div>
+                    <h2 class="fw-bold mb-0">Sign In</h2>
+                    <p class="text-muted small" id="roleLabel">Teacher Login</p>
+                  </div>
+                  <a href="home.html" class="btn btn-link text-decoration-none">
+                    <i class="bi bi-house-door-fill"></i> Home
+                  </a>
+                </div>
+
+                <ul class="nav nav-pills mb-4" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button
+                      class="nav-link active"
+                      id="teacher-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#teacher"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="bi bi-person-badge me-2"></i>Teacher
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button
+                      class="nav-link"
+                      id="student-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#student"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="bi bi-person me-2"></i>Student
+                    </button>
+                  </li>
+                </ul>
+
+                <div id="alertContainer"></div>
+
+                <div class="tab-content">
+                  <!-- Teacher Login -->
+                  <div
+                    class="tab-pane fade show active"
+                    id="teacher"
+                    role="tabpanel"
+                  >
+                    <form
+                      id="teacherForm"
+                      onsubmit="handleLogin(event, 'teacher')"
+                    >
+                      <div class="mb-3">
+                        <label for="teacherId" class="form-label"
+                          >Teacher ID</label
+                        >
+                        <div class="input-group">
+                          <span class="input-group-text"
+                            ><i class="bi bi-person-badge"></i
+                          ></span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="teacherId"
+                            placeholder="e.g., TCH1001"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="teacherPassword" class="form-label"
+                          >Password</label
+                        >
+                        <div class="input-group">
+                          <span class="input-group-text"
+                            ><i class="bi bi-lock-fill"></i
+                          ></span>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="teacherPassword"
+                            placeholder="Enter password"
+                            required
+                          />
+                          <button
+                            class="btn btn-outline-secondary"
+                            type="button"
+                            onclick="togglePassword('teacherPassword')"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="form-check mb-3">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="rememberTeacher"
+                        />
+                        <label class="form-check-label" for="rememberTeacher"
+                          >Remember me</label
+                        >
+                      </div>
+                      <button type="submit" class="btn btn-primary w-100 mb-3">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign in as
+                        Teacher
+                      </button>
+                      <div class="text-center">
+                        <a href="#" class="text-decoration-none small"
+                          >Forgot Password?</a
+                        >
+                      </div>
+                    </form>
+                  </div>
+
+                  <!-- Student Login -->
+                  <div class="tab-pane fade" id="student" role="tabpanel">
+                    <form
+                      id="studentForm"
+                      onsubmit="handleLogin(event, 'student')"
+                    >
+                      <div class="mb-3">
+                        <label for="studentId" class="form-label"
+                          >Student ID</label
+                        >
+                        <div class="input-group">
+                          <span class="input-group-text"
+                            ><i class="bi bi-person"></i
+                          ></span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="studentId"
+                            placeholder="e.g., STU2001"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="studentPassword" class="form-label"
+                          >Password</label
+                        >
+                        <div class="input-group">
+                          <span class="input-group-text"
+                            ><i class="bi bi-lock-fill"></i
+                          ></span>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="studentPassword"
+                            placeholder="Enter password"
+                            required
+                          />
+                          <button
+                            class="btn btn-outline-secondary"
+                            type="button"
+                            onclick="togglePassword('studentPassword')"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="form-check mb-3">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="rememberStudent"
+                        />
+                        <label class="form-check-label" for="rememberStudent"
+                          >Remember me</label
+                        >
+                      </div>
+                      <button type="submit" class="btn btn-primary w-100 mb-3">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign in as
+                        Student
+                      </button>
+                      <div class="text-center">
+                        <a href="#" class="text-decoration-none small"
+                          >Forgot Password?</a
+                        >
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <hr class="my-4" />
+                <div class="text-center">
+                  <p class="mb-2">Don't have an account?</p>
+                  <a href="registration.html" class="btn btn-outline-primary">
+                    <i class="bi bi-person-plus me-2"></i>Register Now
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Update role label when tab changes
+      document.querySelectorAll('["data-bs-toggle="pill"]').forEach((tab) => {
+        tab.addEventListener("shown.bs.tab", function (e) {
+          const role = e.target.textContent.trim();
+          document.getElementById("roleLabel").textContent = role + " Login";
+        });
+      });
+
+      // Toggle password visibility
+      function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const icon = event.currentTarget.querySelector("i");
+        if (input.type === "password") {
+          input.type = "text";
+          icon.classList.replace("bi-eye", "bi-eye-slash");
+        } else {
+          input.type = "password";
+          icon.classList.replace("bi-eye-slash", "bi-eye");
+        }
+      }
+
+      // Show alert message
+      function showAlert(message, type = "danger") {
+        const alertContainer = document.getElementById("alertContainer");
+        alertContainer.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    <i class="bi bi-${
+                      type === "success"
+                        ? "check-circle"
+                        : "exclamation-triangle"
+                    }-fill me-2"></i>
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+      }
+
+      // Handle login
+      function handleLogin(event, role) {
+        event.preventDefault();
+
+        const idField = role === "teacher" ? "teacherId" : "studentId";
+        const passwordField =
+          role === "teacher" ? "teacherPassword" : "studentPassword";
+        const rememberField =
+          role === "teacher" ? "rememberTeacher" : "rememberStudent";
+
+        const userId = document.getElementById(idField).value.trim();
+        const password = document.getElementById(passwordField).value;
+        const remember = document.getElementById(rememberField).checked;
+
+        // Demo credentials
+        const validCredentials = {
+          teacher: { id: "TCH1001", password: "teacher123" },
+          student: { id: "STU2001", password: "student123" },
+        };
+
+        // Validate credentials
+        if (
+          userId === validCredentials[role].id &&
+          password === validCredentials[role].password
+        ) {
+          // Store user data in localStorage
+          const userData = {
+            userId: userId,
+            role: role,
+            loginTime: new Date().toISOString(),
+            remember: remember,
+          };
+
+          if (remember) {
+            localStorage.setItem("lmsUser", JSON.stringify(userData));
+          } else {
+            sessionStorage.setItem("lmsUser", JSON.stringify(userData));
+          }
+          showAlert("Login successful! Redirecting...", "success");
+          // Redirect based on role
+          setTimeout(() => {
+            window.location.href =
+              role === "teacher" ? "teacher.html" : "student.html";
+          }, 1500);
+        } else {
+          showAlert(
+            "Invalid credentials! Use TCH1001/teacher123 or STU2001/student123",
+            "danger"
+          );
+        }
+      }
+
+      // Check if user is already logged in
+      window.onload = function () {
+        const userData = localStorage.getItem("lmsUser");
+        if (userData) {
+          const user = JSON.parse(userData);
+          showAlert(
+            `Welcome back! You are already logged in as ${user.role}.`,
+            "info"
+          );
+        }
+      };
+    </script>
+  </body>
+</html>
